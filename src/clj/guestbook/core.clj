@@ -65,13 +65,16 @@
       (System/exit 1))
     (some #{"init"} args)
     (do
-      (log/info "Run init from -main")
+      (log/info "Run init in -main")
       (migrations/init (select-keys env [:database-url :init-script]))
       (System/exit 0))
     (migrations/migration? args)
     (do
+      (log/info "Run migration in -main")
       (migrations/migrate args (select-keys env [:database-url]))
       (System/exit 0))
     :else
-    (start-app args)))
+    (do
+      (log/info "Run else option in -main")
+      (start-app args))))
 
