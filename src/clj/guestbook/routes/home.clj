@@ -34,7 +34,7 @@
       (response/found "/"))))
 
 
-(defn home-page [request]
+(defn home-page [{:keys [flash] :as request}]
   (layout/render
     request
     "home.html"
